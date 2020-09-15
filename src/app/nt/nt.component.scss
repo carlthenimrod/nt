@@ -1,0 +1,19 @@
+@import 'variables';
+@import 'mixins';
+
+ui-stepper {
+  margin-bottom: 1rem;
+
+  ui-step {
+    padding: 1rem;
+
+    p {
+      color: $blue;
+
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+  }
+}
