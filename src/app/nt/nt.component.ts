@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
+  styleUrls: ['./nt.component.scss'],
   template: `
     <h1>Hello from NT Component</h1>
 
