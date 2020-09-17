@@ -1,7 +1,5 @@
 import { Component, HostBinding } from '@angular/core';
 
-import { StepperService } from '../stepper.service';
-
 @Component({
   selector: 'ui-step',
   styles: [`
@@ -27,11 +25,11 @@ import { StepperService } from '../stepper.service';
     <ng-content></ng-content>
 
     <div>
-      <button (click)="stepperService.goBack()">
+      <button uiStepBack>
         Back
       </button>
 
-      <button (click)="stepperService.goNext()">
+      <button uiStepNext>
         Next
       </button>
     </div>
@@ -44,6 +42,4 @@ export class StepComponent {
   get display(): string {
     return this.selected ? 'flex' : 'none';
   }
-
-  constructor(public stepperService: StepperService) { }
 }
