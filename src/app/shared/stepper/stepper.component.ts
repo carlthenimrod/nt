@@ -5,7 +5,11 @@ import { StepComponent } from './step/step.component';
 
 @Component({
   selector: 'ui-stepper',
-  template: '<ng-content></ng-content>',
+  template: `
+    <ui-step-list [steps]="steps"></ui-step-list>
+
+    <ng-content></ng-content>
+  `,
   providers: [StepperService]
 })
 export class StepperComponent implements OnInit, AfterContentInit {
@@ -17,6 +21,9 @@ export class StepperComponent implements OnInit, AfterContentInit {
   constructor(private stepperService: StepperService) { }
 
   ngOnInit(): void {
+    this.stepperService.step$
+      .subscribe(index => this.onSelect(index));
+
     this.stepperService.back$
       .subscribe(_ => this.onBack());
 
@@ -29,6 +36,13 @@ export class StepperComponent implements OnInit, AfterContentInit {
     this.selectedIndex = 0;
 
     this.steps.first.selected = true;
+  }
+
+  onSelect(index: number): void {
+    if (this.selectedIndex === index) { return; }
+
+    this.selectedIndex = index;
+    this._updateSelected();
   }
 
   onBack(): void {
