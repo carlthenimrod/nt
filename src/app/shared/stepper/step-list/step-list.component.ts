@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, QueryList } from '@angular/core';
-import { StepperService } from '../stepper.service';
+import { Component, Input, QueryList } from '@angular/core';
 
 @Component({
   selector: 'ui-step-list',
@@ -28,18 +27,12 @@ import { StepperService } from '../stepper.service';
   template: `
     <button
       *ngFor="let step of steps; let i=index"
-      (click)="stepperService.goTo(i)"
+      [uiStepSelect]="i"
     >
       {{ i + 1 }}
     </button>
   `
 })
-export class StepListComponent implements OnInit {
+export class StepListComponent {
   @Input() steps: QueryList<StepListComponent>;
-
-  constructor(public stepperService: StepperService) { }
-
-  ngOnInit(): void {
-    console.log(this.steps);
-  }
 }

@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { StepperComponent } from './stepper.component';
 import { StepComponent } from './step/step.component';
 import { StepListComponent } from './step-list/step-list.component';
+import { StepSelectDirective } from './select/select.directive';
 import { StepBackDirective } from './back/back.directive';
 import { StepNextDirective } from './next/next.directive';
 
@@ -12,6 +13,7 @@ import { StepNextDirective } from './next/next.directive';
     StepperComponent,
     StepComponent,
     StepListComponent,
+    StepSelectDirective,
     StepBackDirective,
     StepNextDirective
   ],
