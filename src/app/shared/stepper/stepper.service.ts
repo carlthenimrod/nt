@@ -25,6 +25,7 @@ export class StepperService implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.stepSubject.complete();
     this.backSubject.complete();
     this.nextSubject.complete();
   }

@@ -6,7 +6,10 @@ import { StepComponent } from './step/step.component';
 @Component({
   selector: 'ui-stepper',
   template: `
-    <ui-step-list [steps]="steps"></ui-step-list>
+    <ui-step-list
+      [steps]="steps"
+      [selected]="selected"
+    ></ui-step-list>
 
     <ng-content></ng-content>
   `,
@@ -60,10 +63,13 @@ export class StepperComponent implements OnInit, AfterContentInit {
   }
 
   private _updateSelected(): void {
-    this.steps.forEach((step, index) =>
-      step.selected = this.selectedIndex === index
-        ? true
-        : false
-    );
+    this.steps.forEach((step, index) => {
+      if (this.selectedIndex === index) {
+        this.selected = step;
+        step.selected = true;
+      } else {
+        step.selected = false;
+      }
+    });
   }
 }

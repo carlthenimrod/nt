@@ -1,4 +1,5 @@
 import { Component, Input, QueryList } from '@angular/core';
+import { StepComponent } from '../step/step.component';
 
 @Component({
   selector: 'ui-step-list',
@@ -21,13 +22,20 @@ import { Component, Input, QueryList } from '@angular/core';
       margin: 0 2rem;
       outline: none;
       padding: 1rem;
+      transition: all 50ms linear;
       width: 4rem;
+    }
+
+    button.selected {
+      background-color: #333;
+      color: #eee;
     }
   `],
   template: `
     <button
       *ngFor="let step of steps; let i=index"
       [uiStepSelect]="i"
+      [class.selected]="step === selected"
     >
       {{ i + 1 }}
     </button>
@@ -35,4 +43,6 @@ import { Component, Input, QueryList } from '@angular/core';
 })
 export class StepListComponent {
   @Input() steps: QueryList<StepListComponent>;
+
+  @Input() selected: StepComponent;
 }
