@@ -20,7 +20,10 @@ import { StepNextDirective } from './next/next.directive';
   imports: [CommonModule],
   exports: [
     StepperComponent,
-    StepComponent
+    StepComponent,
+    StepSelectDirective,
+    StepBackDirective,
+    StepNextDirective
   ]
 })
 export class StepperModule { }

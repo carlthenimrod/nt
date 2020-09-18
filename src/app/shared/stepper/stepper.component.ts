@@ -41,10 +41,12 @@ export class StepperComponent implements OnInit, AfterContentInit {
     this.steps.first.selected = true;
   }
 
-  onSelect(index: number): void {
-    if (this.selectedIndex === index) { return; }
+  onSelect(selectedIndex: number): void {
+    if (this.selectedIndex === selectedIndex) { return; }
 
-    this.selectedIndex = index;
+    if (!this._stepsValid(selectedIndex)) { return; }
+
+    this.selectedIndex = selectedIndex;
     this._updateSelected();
   }
 
@@ -57,6 +59,7 @@ export class StepperComponent implements OnInit, AfterContentInit {
 
   onNext(): void {
     if (this.selectedIndex === (this.steps.length - 1)) { return; }
+    if (this.selected.control && !this.selected.control.valid) { return; }
 
     ++this.selectedIndex;
     this._updateSelected();
@@ -71,5 +74,19 @@ export class StepperComponent implements OnInit, AfterContentInit {
         step.selected = false;
       }
     });
+  }
+
+  private _stepsValid(selectedIndex: number): boolean {
+    let valid = true;
+
+    this.steps.forEach((step, index) => {
+      if (index >= selectedIndex) { return; }
+
+      if (step.control && !step.control.valid) {
+        valid = false;
+      }
+    });
+
+    return valid;
   }
 }

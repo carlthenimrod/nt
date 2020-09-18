@@ -10,7 +10,9 @@ export class StepSelectDirective {
 
   constructor(private stepperService: StepperService) { }
 
-  @HostListener('click') onClick(): void {
+  @HostListener('click', ['$event']) onClick(e: Event): void {
+    e.preventDefault();
+
     this.stepperService.goTo(this.uiStepSelect);
   }
 }

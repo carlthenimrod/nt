@@ -1,41 +1,13 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'ui-step',
-  styles: [`
-    div {
-      align-items: center;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    button {
-      background-color: #aaa;
-      border: none;
-      border-radius: 0.25rem;
-      color: #333;
-      cursor: pointer;
-      font-size: 1.5rem;
-      font-weight: 700;
-      padding: 1rem 1.5rem;
-      outline: none;
-    }
-  `],
-  template: `
-    <ng-content></ng-content>
-
-    <div>
-      <button uiStepBack>
-        Back
-      </button>
-
-      <button uiStepNext>
-        Next
-      </button>
-    </div>
-  `
+  template: '<ng-content></ng-content>'
 })
 export class StepComponent {
+  @Input() control: AbstractControl;
+
   selected = false;
 
   @HostBinding('style.display')
