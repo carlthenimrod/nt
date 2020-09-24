@@ -1,4 +1,5 @@
 import { Component, Input, QueryList } from '@angular/core';
+
 import { StepComponent } from '../step/step.component';
 
 @Component({
@@ -8,6 +9,16 @@ import { StepComponent } from '../step/step.component';
       align-items: center;
       display: flex;
       justify-content: center;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .label {
+      padding: 0.5rem 0;
+      text-align: center;
     }
 
     button {
@@ -32,13 +43,18 @@ import { StepComponent } from '../step/step.component';
     }
   `],
   template: `
-    <button
-      *ngFor="let step of steps; let i=index"
-      [uiStepSelect]="i"
-      [class.selected]="step === selected"
-    >
-      {{ i + 1 }}
-    </button>
+    <div *ngFor="let step of steps; let i=index" class="step">
+      <div class="label" *ngIf="step.label">
+        {{ step.label }}
+      </div>
+
+      <button
+        [uiStepSelect]="i"
+        [class.selected]="step === selected"
+      >
+        {{ i + 1 }}
+      </button>
+    </div>
   `
 })
 export class StepListComponent {

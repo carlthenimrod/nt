@@ -8,6 +8,8 @@ import { AbstractControl } from '@angular/forms';
 export class StepComponent {
   @Input() control: AbstractControl;
 
+  @Input() label: string;
+
   selected = false;
 
   @HostBinding('style.display')

@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+
 import { StepperComponent } from '../shared/stepper/stepper.component';
 
 @Component({
@@ -8,7 +9,7 @@ import { StepperComponent } from '../shared/stepper/stepper.component';
     <h1>Hello from NT Component</h1>
 
     <ui-stepper>
-      <ui-step>
+      <ui-step label="Step 1">
         <form [formGroup]="testForm" (ngSubmit)="testForm.valid && onSubmit()">
           <p>Step 1</p>
 
@@ -30,7 +31,7 @@ import { StepperComponent } from '../shared/stepper/stepper.component';
         </form>
       </ui-step>
 
-      <ui-step>
+      <ui-step label="Step 2">
         <p>Step 2</p>
 
         <div>
@@ -44,7 +45,7 @@ import { StepperComponent } from '../shared/stepper/stepper.component';
         </div>
       </ui-step>
 
-      <ui-step>
+      <ui-step label="Step 3">
         <p>Step 3</p>
 
         <div>
