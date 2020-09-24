@@ -21,17 +21,17 @@ export class StepperComponent implements OnInit, AfterContentInit {
   selectedIndex: number;
   selected: StepComponent;
 
-  constructor(private stepperService: StepperService) { }
+  constructor(public stepperService: StepperService) { }
 
   ngOnInit(): void {
     this.stepperService.step$
-      .subscribe(index => this.onSelect(index));
+      .subscribe(index => this._onSelect(index));
 
     this.stepperService.back$
-      .subscribe(_ => this.onBack());
+      .subscribe(_ => this._onBack());
 
     this.stepperService.next$
-      .subscribe(_ => this.onNext());
+      .subscribe(_ => this._onNext());
   }
 
   ngAfterContentInit(): void {
@@ -41,7 +41,7 @@ export class StepperComponent implements OnInit, AfterContentInit {
     this.steps.first.selected = true;
   }
 
-  onSelect(selectedIndex: number): void {
+  private _onSelect(selectedIndex: number): void {
     if (this.selectedIndex === selectedIndex) { return; }
 
     if (!this._stepsValid(selectedIndex)) { return; }
@@ -50,14 +50,14 @@ export class StepperComponent implements OnInit, AfterContentInit {
     this._updateSelected();
   }
 
-  onBack(): void {
+  private _onBack(): void {
     if (this.selectedIndex === 0) { return; }
 
     --this.selectedIndex;
     this._updateSelected();
   }
 
-  onNext(): void {
+  private _onNext(): void {
     if (this.selectedIndex === (this.steps.length - 1)) { return; }
     if (this.selected.control && !this.selected.control.valid) { return; }
 

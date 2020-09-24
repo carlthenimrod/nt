@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { StepperComponent } from '../shared/stepper/stepper.component';
 
 @Component({
   styleUrls: ['./nt.component.scss'],
   template: `
     <h1>Hello from NT Component</h1>
 
-    <form [formGroup]="testForm" (ngSubmit)="testForm.valid && onSubmit()">
-      <ui-stepper>
-        <ui-step [control]="testForm.get('step1')">
+    <ui-stepper>
+      <ui-step>
+        <form [formGroup]="testForm" (ngSubmit)="testForm.valid && onSubmit()">
           <p>Step 1</p>
 
           <input
@@ -22,65 +23,57 @@ import { FormBuilder, Validators } from '@angular/forms';
               Back
             </button>
 
-            <button uiStepNext>
-              Next
-            </button>
-          </div>
-        </ui-step>
-
-        <ui-step [control]="testForm.get('step2')">
-          <p>Step 2</p>
-
-          <input
-            type="text"
-            formControlName="step2"
-            placeholder="Enter Text"
-          >
-
-          <div>
-            <button uiStepBack>
-              Back
-            </button>
-
-            <button uiStepNext>
-              Next
-            </button>
-          </div>
-        </ui-step>
-
-        <ui-step>
-          <p>Step 3</p>
-
-          <input
-            type="text"
-            formControlName="step3"
-            placeholder="Enter Text"
-          >
-
-          <div>
-            <button uiStepBack>
-              Back
-            </button>
-
             <button>
-              Submit
+              Next
             </button>
           </div>
-        </ui-step>
-      </ui-stepper>
-    </form>
+        </form>
+      </ui-step>
+
+      <ui-step>
+        <p>Step 2</p>
+
+        <div>
+          <button uiStepBack>
+            Back
+          </button>
+
+          <button uiStepNext>
+            Next
+          </button>
+        </div>
+      </ui-step>
+
+      <ui-step>
+        <p>Step 3</p>
+
+        <div>
+          <button uiStepBack>
+            Back
+          </button>
+
+          <button>
+            Submit
+          </button>
+        </div>
+      </ui-step>
+    </ui-stepper>
   `
 })
 export class NTComponent {
+  @ViewChild(StepperComponent) stepper: StepperComponent;
+
   testForm = this.fb.group({
-    step1: ['', Validators.required],
-    step2: ['', Validators.required],
-    step3: ['', Validators.required]
+    step1: ['', Validators.required]
   });
 
   constructor(private fb: FormBuilder) { }
 
   onSubmit(): void {
-    console.log(this.testForm.value);
+    // Project is null ?
+    // POST
+
+    // else PUT
+    this.stepper.stepperService.goNext();
   }
 }
